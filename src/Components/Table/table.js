@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Box, Paper, Table as MuiTable, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, Button, TextField, IconButton } from '@mui/material';
-import { addItem, approveItem, missingItem } from '../../redux/itemsSlice';
+import { Box, Paper, Table as MuiTable, TableBody, TableCell, TableContainer, TableHead, TableRow, TableSortLabel, IconButton } from '@mui/material';
+import { approveItem, missingItem } from '../../redux/itemsSlice';
 
 import ClearIcon from '@mui/icons-material/Clear';
 import DoneIcon from '@mui/icons-material/Done';
-import { map as _map, orderBy as _orderBy, filter as _filter, toString as _toString, times as _times, includes as _includes, remove as _remove } from 'lodash-es';
+import { map as _map } from 'lodash-es';
 
 const Table = () => {
     const dispatch = useDispatch();
@@ -28,10 +28,6 @@ const Table = () => {
         console.log(rowInd, 'id', 'handleMissing');
         dispatch(missingItem({ id: rowInd, updatedItem: { ...row, status: 'Missing' } }));
         setIsClicked(!isClicked);
-    };
-
-    const handleCancelEdit = () => {
-        setEditingId(null);
     };
 
     const columns = [
@@ -104,7 +100,6 @@ const Table = () => {
                                             key={column.label}
                                             align='left'
                                             sx={{
-                                                //  borderColor: '#ECEEF3',
                                                 p: '0px 20px',
                                                 height: '36px',
                                                 maxHeight: '36px',
@@ -113,7 +108,6 @@ const Table = () => {
                                                 minWidth: cellWidth,
                                                 maxWidth: cellWidth,
                                                 fontSize: '14px',
-                                                // color: '#444444',
                                             }}
                                             onClick={() => (columns[columnInd].onCellClick ? columns[columnInd].onCellClick(row, cellValue) : null)}>
                                             <>{columns[columnInd].cellTemplate ? columns[columnInd].cellTemplate(row, cellValue, rowInd, handleApprove, handleEdit, handleMissing) : cellValue}</>

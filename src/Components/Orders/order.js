@@ -1,4 +1,4 @@
-import { Box, Stack, Typography, Icon, Button, Divider, TextField } from '@mui/material';
+import { Box, Stack, Button, Divider, TextField } from '@mui/material';
 import Table from '../Table/table';
 import ArrowForwardIosOutlinedIcon from '@mui/icons-material/ArrowForwardIosOutlined';
 import AcUnitIcon from '@mui/icons-material/AcUnit';
@@ -151,7 +151,6 @@ export default function Orders() {
                 </>
                 <>
                     <Box>
-                        {/* <BasicTable /> */}
                         <Table />
                     </Box>
                 </>
