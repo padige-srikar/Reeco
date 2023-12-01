@@ -10,17 +10,11 @@ import { map as _map } from 'lodash-es';
 const Table = () => {
     const dispatch = useDispatch();
     const items = useSelector(state => state.items.list);
-    const [editingId, setEditingId] = useState(null);
     const [isClicked, setIsClicked] = useState(false);
-
-    const handleEdit = row => {
-        setEditingId(row.id);
-    };
 
     const handleApprove = (rowInd, row) => {
         console.log(row, 'row', 'handleApprove');
         dispatch(approveItem({ id: rowInd, updatedItem: { ...row, status: 'Approved' } }));
-        setEditingId(null);
         setIsClicked(!isClicked);
     };
 
@@ -43,7 +37,7 @@ const Table = () => {
             width: '30px',
             sort: false,
             search: false,
-            cellTemplate: (row, cellValue, rowInd, handleApprove, handleEdit, handleMissing) => {
+            cellTemplate: (row, cellValue, rowInd, handleApprove, handleMissing) => {
                 return (
                     <Box display='flex' justifyContent='space-between' sx={{ alignItems: 'center' }}>
                         <IconButton onClick={() => handleApprove(rowInd, row)}>
@@ -52,9 +46,7 @@ const Table = () => {
                         <IconButton onClick={() => handleMissing(rowInd, row)}>
                             <ClearIcon sx={{ color: row.status === 'Missing' ? 'red' : 'grey', fontSize: '15px' }} />
                         </IconButton>
-                        <IconButton variant='outlined' onClick={() => handleEdit(row)} sx={{ fontSize: '12px', border: 'none' }}>
-                            Edit
-                        </IconButton>
+                        <IconButton variant='outlined'>Edit</IconButton>
                     </Box>
                 );
             },
@@ -110,7 +102,7 @@ const Table = () => {
                                                 fontSize: '14px',
                                             }}
                                             onClick={() => (columns[columnInd].onCellClick ? columns[columnInd].onCellClick(row, cellValue) : null)}>
-                                            <>{columns[columnInd].cellTemplate ? columns[columnInd].cellTemplate(row, cellValue, rowInd, handleApprove, handleEdit, handleMissing) : cellValue}</>
+                                            <>{columns[columnInd].cellTemplate ? columns[columnInd].cellTemplate(row, cellValue, rowInd, handleApprove, handleMissing) : cellValue}</>
                                         </TableCell>
                                     );
                                 })}
