@@ -46,7 +46,9 @@ const Table = () => {
                         <IconButton onClick={() => handleMissing(rowInd, row)}>
                             <ClearIcon sx={{ color: row.status === 'Missing' ? 'red' : 'grey', fontSize: '15px' }} />
                         </IconButton>
-                        <IconButton variant='outlined'>Edit</IconButton>
+                        <IconButton variant='outlined' sx={{ fontSize: '15px' }}>
+                            Edit
+                        </IconButton>
                     </Box>
                 );
             },
